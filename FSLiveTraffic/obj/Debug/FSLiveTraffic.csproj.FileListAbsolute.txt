@@ -1,0 +1,10 @@
+c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\bin\Debug\FSLiveTraffic.exe.config
+c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\bin\Debug\FSLiveTraffic.exe
+c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\bin\Debug\FSLiveTraffic.pdb
+c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\obj\Debug\FSLiveTraffic.csprojResolveAssemblyReference.cache
+c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\obj\Debug\FSLiveTraffic.Form1.resources
+c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\obj\Debug\FSLiveTraffic.Properties.Resources.resources
+c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\obj\Debug\FSLiveTraffic.csproj.GenerateResource.Cache
+c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\obj\Debug\FSLiveTraffic.csproj.CoreCompileInputs.cache
+c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\obj\Debug\FSLiveTraffic.exe
+c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\obj\Debug\FSLiveTraffic.pdb
