@@ -8,3 +8,13 @@ c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\obj\Debug\FSLiveTraffic.c
 c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\obj\Debug\FSLiveTraffic.csproj.CoreCompileInputs.cache
 c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\obj\Debug\FSLiveTraffic.exe
 c:\users\seth\source\repos\FSLiveTraffic\FSLiveTraffic\obj\Debug\FSLiveTraffic.pdb
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\bin\Debug\FSLiveTraffic.exe.config
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\bin\Debug\FSLiveTraffic.exe
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\bin\Debug\FSLiveTraffic.pdb
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\obj\Debug\FSLiveTraffic.csprojResolveAssemblyReference.cache
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\obj\Debug\FSLiveTraffic.Form1.resources
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\obj\Debug\FSLiveTraffic.Properties.Resources.resources
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\obj\Debug\FSLiveTraffic.csproj.GenerateResource.Cache
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\obj\Debug\FSLiveTraffic.csproj.CoreCompileInputs.cache
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\obj\Debug\FSLiveTraffic.exe
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\obj\Debug\FSLiveTraffic.pdb

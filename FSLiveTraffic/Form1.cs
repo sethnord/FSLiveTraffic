@@ -11,7 +11,7 @@ using System.Timers;
 
 namespace FSLiveTraffic
 {
-    //Now On GitHub! TEST COMMIT...
+    //Now On GitHub!
     public partial class Form1 : Form
     {
         int _trackRad = 200;
