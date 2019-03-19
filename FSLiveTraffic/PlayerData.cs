@@ -45,7 +45,15 @@ namespace FSLiveTraffic
 
                     try
                     {
-                        stream = client.GetStream();
+                        if (client.Connected)
+                        {
+                            stream = client.GetStream();
+                        }
+                        else
+                        {
+                            PlayerData pd = new PlayerData();
+                            pd.Disconnect();
+                        }
                     }
                     catch (InvalidOperationException)
                     {
@@ -53,8 +61,18 @@ namespace FSLiveTraffic
                     }
                     
                     string data = String.Empty;
-                    Int32 bytes = stream.Read(buffer, 0, buffer.Length);
-                    data = Encoding.ASCII.GetString(buffer, 0, bytes);
+
+                    try
+                    {
+                        Int32 bytes = stream.Read(buffer, 0, buffer.Length);
+                        data = Encoding.ASCII.GetString(buffer, 0, bytes);
+                    }
+                    catch
+                    {
+                        PlayerData pd = new PlayerData();
+                        pd.Disconnect();
+                    }
+                    
 
                     //Okay, now, we have the data, it SHOULD be in this format
                     //Qs121=0;0;5.072578;0;0;0.891259;-0.077921
@@ -143,6 +161,13 @@ namespace FSLiveTraffic
             }
             ctr = 0;
             return data;
+        }
+
+        public void Disconnect()
+        {
+            Form1 f1 = new Form1();
+            f1.DisconnectTCP(); //Change the label to DISCONNECTED and also shutdown the weather getter.
+            f1.DisconnectWX();
         }
     }
 }

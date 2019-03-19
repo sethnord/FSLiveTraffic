@@ -11,7 +11,6 @@ using System.Timers;
 
 namespace FSLiveTraffic
 {
-    //TEST COMMIT #6
     public partial class Form1 : Form
     {
         int _trackRad = 200;
@@ -43,12 +42,32 @@ namespace FSLiveTraffic
             {
                 //If we are connected to the player location server, go ahead and get the first wx request
                 string[] response = WxManager.GetMetar(PlayerData.playerLat, PlayerData.playerLng, 20); //Get the closest metar within a 20 nm radius
-                                   //Convert from inHg to QNH
+                                                                                                        //Convert from inHg to QNH
+                                                                                                        //Update player location display
+                
+
+                if (label2.InvokeRequired)
+                {
+                    label2.Invoke(new Action(() => label2.Text = PlayerData.playerLat.ToString()));
+                }
+                else
+                {
+                    label2.Text = PlayerData.playerLat.ToString();
+                }
+
+                if (label3.InvokeRequired)
+                {
+                    label3.Invoke(new Action(() => label3.Text = PlayerData.playerLng.ToString()));
+                }
+                else
+                {
+                    label3.Text = PlayerData.playerLng.ToString();
+                }
+                
                 if(response[0] != null)
                 {
                     double pressure = Convert.ToDouble(response[5]) * 33.864;
 
-                    MessageBox.Show(pressure.ToString()); //DEBUG
 
                     //Update the screen
                     //Combine the wind speed
@@ -171,7 +190,22 @@ namespace FSLiveTraffic
             //In order to stop this, we need to set a variable to stop.
             toolStripStatusLabel2.ForeColor = Color.LimeGreen;
             toolStripStatusLabel2.Text = "CONNECTED";
+            button1.Enabled = false;
             _TcpConnected = true;
+        }
+
+        public void DisconnectTCP()
+        {
+            toolStripStatusLabel2.Text = "DISCONNECTED";
+            toolStripStatusLabel2.ForeColor = Color.Red;
+            button1.Enabled = true;
+        }
+
+        public void DisconnectWX()
+        {
+            toolStripStatusLabel11.Text = "DISCONNECTED";
+            toolStripStatusLabel11.ForeColor = Color.Red;
+            button4.Enabled = true;
         }
     }
 }
