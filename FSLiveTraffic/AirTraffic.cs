@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Net;
+using System.Xml;
 
 namespace FSLiveTraffic
 {
@@ -18,7 +20,7 @@ namespace FSLiveTraffic
         static string _baseRequest = "https://opensky-network.org/api/states/all?";
         static Timer timer;
 
-        public static string[] Get(double playerLat, double playerLng, int radius)
+        public static string Get(double playerLat, double playerLng, int radius)
         {
             /*This function will return a variable length string array including the following:
              * 
@@ -57,7 +59,7 @@ namespace FSLiveTraffic
 
             //Calculate nm per degrees given current position.
 
-            timer.Interval = 10000; //10 Seconds
+            //timer.Interval = 10000; //10 Seconds
 
             double milesPerDegreeLat = 68.703;
             double milesPerDegreeLng = NauticalMilesPerDegree(playerLng);
@@ -83,10 +85,9 @@ namespace FSLiveTraffic
 
             using (WebClient wc = new WebClient())
             {
-                var json = wc.DownloadString("url");
+                var json = wc.DownloadString(finalRequest);
 
-                List<Aircraft> aircraft = JsonConvert.DeserializeObject<List<Aircraft>>(json);
-                
+                return JsonConvert.DeserializeObject(json).ToString();
             }
 
         }

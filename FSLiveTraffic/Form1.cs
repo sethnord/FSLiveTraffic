@@ -237,5 +237,10 @@ namespace FSLiveTraffic
             toolStripStatusLabel11.ForeColor = Color.Red;
             button4.Enabled = true;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(AirTraffic.Get(PlayerData.playerLat, PlayerData.playerLng, _trackRad));
+        }
     }
 }

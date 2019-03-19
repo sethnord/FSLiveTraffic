@@ -18,3 +18,6 @@ C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\obj\Debug\FSLiveTr
 C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\obj\Debug\FSLiveTraffic.csproj.CoreCompileInputs.cache
 C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\obj\Debug\FSLiveTraffic.exe
 C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\obj\Debug\FSLiveTraffic.pdb
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Seth\Source\Repos\FSLiveTraffic-GITHUB\FSLiveTraffic\bin\Debug\Newtonsoft.Json.xml
