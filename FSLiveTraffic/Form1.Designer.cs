@@ -588,7 +588,7 @@
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(106, 23);
             this.label22.TabIndex = 7;
-            this.label22.Text = "minutes.";
+            this.label22.Text = "seconds.";
             // 
             // label24
             // 
@@ -616,7 +616,7 @@
             this.numericUpDown1.Size = new System.Drawing.Size(48, 30);
             this.numericUpDown1.TabIndex = 4;
             this.numericUpDown1.Value = new decimal(new int[] {
-            1,
+            8,
             0,
             0,
             0});

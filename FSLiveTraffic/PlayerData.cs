@@ -68,7 +68,7 @@ namespace FSLiveTraffic
 
                     if(data != "")
                     {
-                        if(data == "exit ")
+                        if(data == "exit")
                         {
                             //exit signal sent...
                             //for some reason, we aren't getting the message, so we'll figure this out later.
