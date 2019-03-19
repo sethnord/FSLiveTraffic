@@ -45,19 +45,12 @@ namespace FSLiveTraffic
 
                     try
                     {
-                        if (client.Connected)
-                        {
                             stream = client.GetStream();
-                        }
-                        else
-                        {
-                            PlayerData pd = new PlayerData();
-                            pd.Disconnect();
-                        }
                     }
                     catch (InvalidOperationException)
                     {
-
+                        Disconnect();
+                        Thread.Yield();
                     }
                     
                     string data = String.Empty;
@@ -69,11 +62,21 @@ namespace FSLiveTraffic
                     }
                     catch
                     {
-                        PlayerData pd = new PlayerData();
-                        pd.Disconnect();
+                        Disconnect();
+                        Thread.Yield();
                     }
-                    
 
+                    if(data != "")
+                    {
+                        if(data == "exit ")
+                        {
+                            //exit signal sent...
+                            //for some reason, we aren't getting the message, so we'll figure this out later.
+                            //TODO: Fix this.
+                            MessageBox.Show("Disconnecting");
+                            Disconnect();
+                        }
+                    }
                     //Okay, now, we have the data, it SHOULD be in this format
                     //Qs121=0;0;5.072578;0;0;0.891259;-0.077921
                     //Header;Unused;Unused,Heading(RAD),Unused,Unused,Latitude(RAD),Longitude(RAD)
@@ -91,6 +94,15 @@ namespace FSLiveTraffic
         {
             int ctr = 0;
             double[] data = new double[3];
+            //Check and see if the server is about to disconnect...
+            
+            if(raw == "exit")
+            {
+                //This will be sent by the server whenever it is shutting down.
+                //If we receive this, then we should also disconnect.
+                MessageBox.Show("DISCONNECTED!");
+                Disconnect();
+            }
             char[] indivLetters = raw.ToCharArray();
             string working = String.Empty;
             bool lastOne = false;
@@ -128,7 +140,11 @@ namespace FSLiveTraffic
                     switch (ctr)
                     {
                         case 0:
-                            //Header --IGNORE--
+                            //Header --IGNORE-- unless it is 'exit'
+                            if(working == "exit")
+                            {
+                                Disconnect();
+                            }
                             break;
                         case 1:
                             //--IGNORE--
@@ -163,7 +179,7 @@ namespace FSLiveTraffic
             return data;
         }
 
-        public void Disconnect()
+        public static void Disconnect()
         {
             Form1 f1 = new Form1();
             f1.DisconnectTCP(); //Change the label to DISCONNECTED and also shutdown the weather getter.
