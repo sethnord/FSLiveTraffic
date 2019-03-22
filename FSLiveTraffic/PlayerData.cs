@@ -13,8 +13,8 @@ namespace FSLiveTraffic
     class PlayerData
     {
         static NetworkStream stream;
-        public static Double playerLat = 38.507778;
-        public static Double playerLng = -122.812074;
+        public static Double playerLat = 37.616991;
+        public static Double playerLng = -122.378047;
         public static Double playerHdg = 0.0;
 
         public static bool stop = false;

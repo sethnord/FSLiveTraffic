@@ -89,12 +89,14 @@ namespace FSLiveTraffic
 
                 var result = JsonConvert.DeserializeObject<AircraftList>(json);
 
-                AircraftList aircraftList = new AircraftList();
-
-                if(result.states == null){
+                if(result.states != null)
+                {
                     return result.states[0][0];
                 }
-                else { return result.time; }
+                else
+                {
+                    return result.time;
+                }
             }
 
         }
