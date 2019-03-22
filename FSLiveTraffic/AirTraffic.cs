@@ -87,7 +87,14 @@ namespace FSLiveTraffic
             {
                 var json = wc.DownloadString(finalRequest);
 
-                return JsonConvert.DeserializeObject(json).ToString();
+                var result = JsonConvert.DeserializeObject<AircraftList>(json);
+
+                AircraftList aircraftList = new AircraftList();
+
+                if(result.states == null){
+                    return result.states[0][0];
+                }
+                else { return result.time; }
             }
 
         }
