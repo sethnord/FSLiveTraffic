@@ -1,10 +1,36 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <response xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XML-Schema-instance" version="1.2" xsi:noNamespaceSchemaLocation="http://aviationweather.gov/adds/schema/metar1_2.xsd">
-  <request_index>100276330</request_index>
+  <request_index>114835249</request_index>
   <data_source name="metars" />
   <request type="retrieve" />
   <errors />
   <warnings />
-  <time_taken_ms>5</time_taken_ms>
-  <data num_results="0" />
+  <time_taken_ms>394</time_taken_ms>
+  <data num_results="1">
+    <METAR>
+      <raw_text>KSQL 230835Z AUTO 18003KT 3SM -RA FEW003 SCT038 BKN045 12/12 A3014 RMK AO2 P0001</raw_text>
+      <station_id>KSQL</station_id>
+      <observation_time>2019-03-23T08:35:00Z</observation_time>
+      <latitude>37.52</latitude>
+      <longitude>-122.25</longitude>
+      <temp_c>12.0</temp_c>
+      <dewpoint_c>12.0</dewpoint_c>
+      <wind_dir_degrees>180</wind_dir_degrees>
+      <wind_speed_kt>3</wind_speed_kt>
+      <visibility_statute_mi>3.0</visibility_statute_mi>
+      <altim_in_hg>30.138779</altim_in_hg>
+      <quality_control_flags>
+        <auto>TRUE</auto>
+        <auto_station>TRUE</auto_station>
+      </quality_control_flags>
+      <wx_string>-RA</wx_string>
+      <sky_condition sky_cover="FEW" cloud_base_ft_agl="300" />
+      <sky_condition sky_cover="SCT" cloud_base_ft_agl="3800" />
+      <sky_condition sky_cover="BKN" cloud_base_ft_agl="4500" />
+      <flight_category>MVFR</flight_category>
+      <precip_in>0.01</precip_in>
+      <metar_type>SPECI</metar_type>
+      <elevation_m>1.0</elevation_m>
+    </METAR>
+  </data>
 </response>

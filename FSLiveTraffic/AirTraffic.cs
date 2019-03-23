@@ -20,7 +20,7 @@ namespace FSLiveTraffic
         static string _baseRequest = "https://opensky-network.org/api/states/all?";
         static Timer timer;
 
-        public static string Get(double playerLat, double playerLng, int radius)
+        public static Aircraft[] Get(double playerLat, double playerLng, int radius)
         {
             /*This function will return a variable length string array including the following:
              * 
@@ -68,10 +68,10 @@ namespace FSLiveTraffic
             double latDegrees = squareRtRadius / milesPerDegreeLng;
 
             //These are the bounds that define our square
-            double lowerLng = -(lngDegrees);
-            double lowerLat = -(latDegrees);
-            double upperLng = lngDegrees;
-            double upperLat = latDegrees;
+            double lowerLng = playerLng - lngDegrees;
+            double upperLat = playerLat - latDegrees;
+            double upperLng = playerLng + lngDegrees;
+            double lowerLat = playerLat + latDegrees;
 
             //https://opensky-network.org/apidoc/rest.html#limitations
 
@@ -89,14 +89,49 @@ namespace FSLiveTraffic
 
                 var result = JsonConvert.DeserializeObject<AircraftList>(json);
 
-                if(result.states != null)
-                {
-                    return result.states[0][0];
-                }
-                else
-                {
-                    return result.time;
-                }
+                //We need an aircraft array to hold all of the aircraft we are going to parse.
+                Aircraft[] aircraft = new Aircraft[Form1._maxAC];
+
+                    for (int i = 0; i < Form1._maxAC ; i++) //This loop is for each individual aircraft.
+                    {
+                        //Create an aircraft object to hold this data.
+                        Aircraft thisPlane = new Aircraft();
+
+                    string testVal;
+                    try
+                    {
+                        testVal = result.states[i][0];
+                    }
+                    catch(IndexOutOfRangeException)
+                    {
+                        break;
+                    }
+                    if (testVal == null)
+                    {
+                        break;
+                    }
+                        thisPlane.icao = result.states[i][0];
+                        thisPlane.callsign = result.states[i][1];
+                        thisPlane.origin_country = result.states[i][2];
+                        thisPlane.time_position = result.states[i][3];
+                        thisPlane.last_contact = result.states[i][4];
+                        thisPlane.longitude = result.states[i][5];
+                        thisPlane.latitude = result.states[i][6];
+                        thisPlane.baro_altitude = result.states[i][7];
+                        thisPlane.on_ground = result.states[i][8];
+                        thisPlane.velocity = result.states[i][9];
+                        thisPlane.true_track = result.states[i][10];
+                        thisPlane.vertical_rate = result.states[i][11];
+                        //12 was omitted because it serves no purpose in life.
+                        thisPlane.geo_altitude = result.states[i][13];
+                        thisPlane.sqwawk = result.states[i][14];
+                        thisPlane.spi = result.states[i][15];
+                        thisPlane.position_source = result.states[i][16];
+
+                        aircraft[i] = thisPlane;
+                    }
+
+                return aircraft;
             }
 
         }

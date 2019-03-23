@@ -17,8 +17,10 @@ namespace FSLiveTraffic
     //TODO: Clean up code.
     public partial class Form1 : Form
     {
+        Aircraft[] _planeList;
+
         int _trackRad = 200;
-        int _maxAC = 100;
+        public static int _maxAC = 100;
 
         System.Timers.Timer wxUpdate;
         int _wxupdateInterval = 8000;
@@ -128,6 +130,13 @@ namespace FSLiveTraffic
                     //Okay... they don't explicitly say not to do that, so I don't see much harm in requesting 1 station.
                     //I'll change the per minute section to be per second.
                     udpSender.Send(toSend, toSend.Length);
+
+                    if (_ADSBConnected)
+                    {
+                        //I'm piggybacking off the wx timer because I'm too lazy to make another one.
+                        //TODO: make a timer exclusively for ADS-B Data.
+                        UpdateAircraft(AirTraffic.Get(PlayerData.playerLat, PlayerData.playerLng, _trackRad));
+                    }
                 }
             }
             //Otherwise do nothing
@@ -240,7 +249,96 @@ namespace FSLiveTraffic
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(AirTraffic.Get(PlayerData.playerLat, PlayerData.playerLng, _trackRad));
+            _planeList = AirTraffic.Get(PlayerData.playerLat, PlayerData.playerLng, _trackRad);
+            UpdateAircraft(_planeList);
+        }
+
+        private void UpdateAircraft(Aircraft[] list)
+        {
+            //Send updated aircraft list via tcp.
+            for(int i = 0; i < _maxAC; i++)
+            {
+                //We'll need to manually exit the loop if we reach the end of the array
+                string[] toSend = new string[15];
+
+                Aircraft working = list[i];
+
+
+                try
+                {
+                    toSend[0] = working.icao;
+                    toSend[1] = working.callsign;
+                    toSend[2] = working.origin_country;
+                    toSend[3] = working.time_position;
+                    toSend[4] = working.last_contact;
+                    toSend[5] = working.longitude;
+                    toSend[6] = working.latitude;
+                    toSend[7] = working.baro_altitude;
+                    toSend[8] = working.on_ground;
+                    toSend[9] = working.velocity;
+                    toSend[10] = working.true_track;
+                    toSend[11] = working.vertical_rate;
+                    toSend[12] = working.geo_altitude;
+                    toSend[13] = working.sqwawk;
+                    toSend[14] = working.spi;
+                }
+                catch (NullReferenceException)
+                {
+                    break;
+                }
+
+                double agl = 0.0;
+                double vs = 0.0;
+                int ab = 0;
+                double track = 0.0;
+                double gs = 0.0;
+
+                try
+                {
+                    agl = Convert.ToDouble(toSend[12]) * 3.281;
+                    vs = Convert.ToDouble(toSend[11]) * 3.281;
+                    if(toSend[8] == "false")
+                    {
+                        ab = 0;
+                    }
+                    else
+                    {
+                        ab = 1;
+                    }
+                    track = Convert.ToDouble(toSend[10]);
+                    gs = Convert.ToDouble(toSend[9]) * 1.944;
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    break;
+                }
+                
+                string acType = "B738"; //TODO: Find some way to parse a CSV database and get the AC type.
+                string tailNo = "N1234A"; //TODO: "" "" and get the tail number.
+                //Because this is set to B738, all aircraft will show up as 737-800s with a tail number of N1234A
+
+                //Now, condense this all into one string...
+                //Per the spec:
+                //AITFC,ICAO ID,LAT,LONG,ALT(FT),V/S(FT/MIN),AIRBORNE(1/0),TRACK(DEG),GROUNDSPEED(KTS),CALLSIGN,ICAO TYPE CODE,TAIL NO,ORIGIN,DESTINATION
+                string data = "AITFC," + toSend[0] + "," + toSend[6] + "," + toSend[5] + "," + agl.ToString() + "," 
+                    + vs + "," + ab + "," + track + "," + gs + "," + toSend[1] + "," + acType + "," + tailNo + ",,";
+
+                byte[] sendable = Encoding.ASCII.GetBytes(data);
+                SendACData(sendable);
+            }
+        }
+
+        private void SendACData(byte[] data)
+        {
+            UdpClient udp = new UdpClient();
+            udp.Connect(IPAddress.Loopback, 49003);
+            udp.Send(data, data.Length);
+            _ADSBConnected = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
